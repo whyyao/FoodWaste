@@ -1,16 +1,14 @@
 package com.example.foodwaste
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.foodwaste.databinding.ActivityMainBinding
+import com.example.foodwaste.storage.StockFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
 
         val shoppingFragment = ShoppingFragment()
         val stockFragment = StockFragment()

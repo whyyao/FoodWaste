@@ -1,4 +1,4 @@
-package com.example.foodwaste
+package com.example.foodwaste.storage
 
 import android.content.Context
 import android.os.Bundle
@@ -28,10 +28,17 @@ class StockFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // this creates a vertical layout Manager
+        binding.storageRecyclerView.adapter = StorageListAdapter(
+            listOf(
+                FoodItem("Apple"), FoodItem("Banana")
+            )
+        )
+
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         val json = sharedPref.getString("saved", "")
         val foodItem = Gson().fromJson(json, FoodItem::class.java)
 
-        binding.text.text = foodItem?.name ?: ""
+//        binding.text.text = foodItem?.name ?: ""
     }
 }
