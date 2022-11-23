@@ -1,6 +1,5 @@
 package com.example.foodwaste
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.foodwaste.databinding.FragmentFirstBinding
-import com.journeyapps.barcodescanner.CaptureActivity
+import com.example.foodwaste.model.FoodItem
+import com.google.gson.Gson
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
@@ -64,9 +64,18 @@ class FirstFragment : Fragment() {
             val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Result")
             builder.setMessage(result.contents)
-            builder.setPositiveButton("OK",
-                DialogInterface.OnClickListener { dialogInterface, i -> dialogInterface.dismiss() })
-                .show()
+            builder.setPositiveButton("OK") { dialogInterface, _ ->
+                run {
+                    saveItem(result.contents)
+                    dialogInterface.dismiss()
+                }
+            }
+            builder.show()
         }
+    }
+
+    private fun saveItem(stream: String) {
+        val foodItem = Gson().fromJson(stream, FoodItem::class.java)
+        println("hey$foodItem")
     }
 }
