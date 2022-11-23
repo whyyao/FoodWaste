@@ -5,7 +5,10 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.foodwaste.databinding.ActivityMainBinding
 
@@ -16,6 +19,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // force bright mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        // setting gesture navigation bar color
+        val window: Window = this@MainActivity.window
+        window.navigationBarColor =
+            ContextCompat.getColor(this@MainActivity, R.color.gesture_navigation_color)
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
