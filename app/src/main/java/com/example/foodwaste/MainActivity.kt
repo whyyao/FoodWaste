@@ -1,5 +1,7 @@
 package com.example.foodwaste
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -27,6 +29,15 @@ class MainActivity : AppCompatActivity() {
 //                    .setAnchorView(R.id.fab)
 //                    .setAction("Action", null).show()
 //        }
+
+
+        val sharedPref = getPreferences(
+            Context.MODE_PRIVATE
+        )
+        sharedPref.edit().clear().apply()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, shoppingFragment).commit()
 
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
