@@ -17,7 +17,7 @@ import com.journeyapps.barcodescanner.ScanOptions
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class ShoppingFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
 
