@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.foodwaste.R
 import com.example.foodwaste.databinding.FragmentStockBinding
 import com.example.foodwaste.model.FoodItem
 import com.google.gson.Gson
@@ -25,6 +26,8 @@ class StockFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentStockBinding.inflate(inflater, container, false)
+        requireActivity().window.statusBarColor =
+            resources.getColor(R.color.accent, requireActivity().theme)
         return binding.root
     }
 

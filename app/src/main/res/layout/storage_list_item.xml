@@ -81,4 +81,12 @@
         app:layout_constraintStart_toEndOf="@id/storage_list_item_co2_icon"
         app:layout_constraintTop_toBottomOf="@id/storage_list_item_title" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
