@@ -33,13 +33,6 @@ class MainActivity : AppCompatActivity() {
         val shoppingFragment = ShoppingFragment()
         val stockFragment = StockFragment()
 
-//        binding.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAnchorView(R.id.fab)
-//                    .setAction("Action", null).show()
-//        }
-
-
         val sharedPref = getPreferences(
             Context.MODE_PRIVATE
         )

@@ -18,6 +18,8 @@ class StockFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val stockListAdapter: StorageListAdapter get() = binding.storageRecyclerViewStockList.adapter as StorageListAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,17 +32,45 @@ class StockFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // this creates a vertical layout Manager
         binding.storageRecyclerViewStockList.adapter = StorageListAdapter(
-            MutableList(20) { FoodItem("apple") }
+            testStockList
         )
 
         binding.storageRecyclerViewExpiredList.adapter = ExpiringListAdapter(
-            MutableList(3) { FoodItem("apple") }
+            testExpiringList
         )
 
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         val json = sharedPref.getString("saved", "")
-        val foodItem = Gson().fromJson(json, FoodItem::class.java)
-
-//        binding.text.text = foodItem?.name ?: ""
+        val foodItem = Gson().fromJson(json, FoodItem::class.java)?.let {
+            val resultList = testStockList.toMutableList()
+            resultList.add(it)
+            stockListAdapter.update(resultList)
+        }
     }
 }
+
+val testExpiringList = listOf(
+    FoodItem(
+        name = "apple",
+        expirationDate = "2022-11-30",
+        co2 = 2
+    ),
+    FoodItem(
+        name = "onions",
+        expirationDate = "2022-11-29",
+        co2 = 3
+    )
+)
+
+val testStockList = listOf(
+    FoodItem(
+        name = "apple",
+        expirationDate = "2022-12-5",
+        co2 = 2
+    ),
+    FoodItem(
+        name = "ginger",
+        expirationDate = "2022-12-10",
+        co2 = 1
+    )
+)
