@@ -31,7 +31,6 @@ class StorageListAdapter(private val mList: List<FoodItem>) :
 
         // sets the text to the textview from our itemHolder class
         holder.textView.text = ItemsViewModel.name
-
     }
 
     // return the number of the items in the list
