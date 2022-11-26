@@ -43,12 +43,12 @@ class StockFragment : Fragment() {
 
 val testExpiringList = listOf(
     FoodItem(
-        name = "apple",
+        name = "Apple",
         expirationDate = "2022-11-30",
         co2 = 2
     ),
     FoodItem(
-        name = "onions",
+        name = "Onions",
         expirationDate = "2022-11-29",
         co2 = 3
     )
@@ -56,12 +56,12 @@ val testExpiringList = listOf(
 
 val testStockList = listOf(
     FoodItem(
-        name = "apple",
+        name = "Apple",
         expirationDate = "2022-12-5",
         co2 = 2
     ),
     FoodItem(
-        name = "ginger",
+        name = "Ginger",
         expirationDate = "2022-12-10",
         co2 = 1
     )

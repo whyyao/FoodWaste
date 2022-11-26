@@ -6,6 +6,7 @@
         <item name="colorSecondary">#59614C</item>
         <item name="colorSecondaryContainer">#DDE6CC</item>
         <item name="colorSurface">#FEFCF6</item>
+        <item name="fontFamily">@font/poppins</item>
     </style>
 
     <style name="Theme.FoodWaste" parent="Base.Theme.FoodWaste" />

@@ -6,4 +6,5 @@
 
     <color name="subtitle">#75796C</color>
     <color name="accent">#EFF2E3</color>
+    <color name="expiring_pill_color">#FFDAD6</color>
 </resources>

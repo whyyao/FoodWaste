@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodwaste.R
 import com.example.foodwaste.model.FoodItem
@@ -33,6 +34,7 @@ class ExpiringListAdapter(private val mList: List<FoodItem>) :
         holder.titleView.text = ItemsViewModel.name
         holder.dateView.text = ItemsViewModel.expirationDate
         holder.co2View.text = "${ItemsViewModel.co2}kg"
+        holder.pillView.isVisible = true
     }
 
     // return the number of the items in the list
@@ -46,5 +48,6 @@ class ExpiringListAdapter(private val mList: List<FoodItem>) :
         val titleView: TextView = itemView.findViewById(R.id.storage_list_item_title)
         val dateView: TextView = itemView.findViewById(R.id.storage_list_item_date)
         val co2View: TextView = itemView.findViewById(R.id.storage_list_item_co2)
+        val pillView: TextView = itemView.findViewById(R.id.storage_list_item_pill)
     }
 }
