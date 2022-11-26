@@ -29,8 +29,12 @@ class StockFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // this creates a vertical layout Manager
-        binding.storageRecyclerView.adapter = StorageListAdapter(
+        binding.storageRecyclerViewStockList.adapter = StorageListAdapter(
             MutableList(20) { FoodItem("apple") }
+        )
+
+        binding.storageRecyclerViewExpiredList.adapter = ExpiringListAdapter(
+            MutableList(3) { FoodItem("apple") }
         )
 
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
