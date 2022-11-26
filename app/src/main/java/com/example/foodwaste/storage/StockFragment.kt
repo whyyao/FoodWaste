@@ -38,14 +38,6 @@ class StockFragment : Fragment() {
         binding.storageRecyclerViewExpiredList.adapter = ExpiringListAdapter(
             testExpiringList
         )
-
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        val json = sharedPref.getString("saved", "")
-        val foodItem = Gson().fromJson(json, FoodItem::class.java)?.let {
-            val resultList = testStockList.toMutableList()
-            resultList.add(it)
-            stockListAdapter.update(resultList)
-        }
     }
 }
 

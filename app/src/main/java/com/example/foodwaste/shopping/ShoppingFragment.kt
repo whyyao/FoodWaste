@@ -1,14 +1,16 @@
 package com.example.foodwaste.shopping
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.foodwaste.CaptureAct
 import com.example.foodwaste.databinding.FragmentShoppingBinding
+import com.example.foodwaste.model.FoodItem
+import com.google.gson.Gson
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
@@ -24,21 +26,19 @@ class ShoppingFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var shoppingList: List<FoodItem> = emptyList()
+        set(value) {
+            field = value
+            adapter.update(value)
+        }
+
+    private val adapter get() = binding.storageRecyclerViewShoppingTrackerList.adapter as ShoppingListAdapter
 
     var barLaucher = registerForActivityResult(
         ScanContract()
     ) { result: ScanIntentResult ->
         if (result.contents != null) {
-            val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-            builder.setTitle("Result")
-            builder.setMessage(result.contents)
-            builder.setPositiveButton("OK") { dialogInterface, _ ->
-                run {
-                    saveItem(result.contents)
-                    dialogInterface.dismiss()
-                }
-            }
-            builder.show()
+            itemScanned(result.contents)
         }
     }
 
@@ -48,16 +48,7 @@ class ShoppingFragment : Fragment() {
             ScanContract()
         ) { result: ScanIntentResult ->
             if (result.contents != null) {
-                val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-                builder.setTitle("Result")
-                builder.setMessage(result.contents)
-                builder.setPositiveButton("OK") { dialogInterface, _ ->
-                    run {
-                        saveItem(result.contents)
-                        dialogInterface.dismiss()
-                    }
-                }
-                builder.show()
+                itemScanned(result.contents)
             }
         }
     }
@@ -97,13 +88,20 @@ class ShoppingFragment : Fragment() {
         barLaucher.launch(scanOptions)
     }
 
-    private fun saveItem(stream: String) {
-        val sharedPref = activity?.getPreferences(
-            Context.MODE_PRIVATE
-        )
-        with(sharedPref?.edit() ?: return) {
-            putString("saved", stream)
-            apply()
+    private fun itemScanned(stream: String) {
+        Gson().fromJson(stream, FoodItem::class.java)?.let {
+            val tempList = shoppingList.toMutableList()
+            tempList.add(it)
+            shoppingList = tempList
         }
+
+//        val sharedPref = activity?.getPreferences(
+//            Context.MODE_PRIVATE
+//        )
+//        with(sharedPref?.edit() ?: return) {
+//            putString("shop_tracking", stream)
+//            apply()
+//        }
+
     }
 }
