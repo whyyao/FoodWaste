@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp">
 
     <ImageView
         android:id="@+id/storage_list_item_thumbnail"
@@ -20,10 +21,51 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:textSize="16sp"
         android:text="Carrots"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/storage_list_item_thumbnail"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/storage_list_item_calendar_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintBottom_toBottomOf="@id/storage_list_item_date"
+        app:layout_constraintStart_toStartOf="@id/storage_list_item_title"
+        app:layout_constraintTop_toTopOf="@id/storage_list_item_date" />
+
+    <TextView
+        android:id="@+id/storage_list_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Nov 13"
+        android:textColor="@color/subtitle"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/storage_list_item_calendar_icon"
+        app:layout_constraintTop_toBottomOf="@id/storage_list_item_title" />
+
+    <ImageView
+        android:id="@+id/storage_list_item_co2_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/ic_co2"
+        app:layout_constraintBottom_toBottomOf="@id/storage_list_item_date"
+        app:layout_constraintStart_toEndOf="@id/storage_list_item_date"
+        app:layout_constraintTop_toTopOf="@id/storage_list_item_date" />
+
+    <TextView
+        android:id="@+id/storage_list_item_co2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="2kg"
+        android:textColor="@color/subtitle"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/storage_list_item_co2_icon"
+        app:layout_constraintTop_toBottomOf="@id/storage_list_item_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

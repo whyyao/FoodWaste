@@ -30,9 +30,7 @@ class StockFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // this creates a vertical layout Manager
         binding.storageRecyclerView.adapter = StorageListAdapter(
-            listOf(
-                FoodItem("Apple"), FoodItem("Banana")
-            )
+            MutableList(20) { FoodItem("apple") }
         )
 
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
