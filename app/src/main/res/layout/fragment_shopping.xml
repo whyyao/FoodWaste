@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShoppingFragment">
+    tools:context=".shopping.ShoppingFragment">
 
     <Button
-        android:id="@+id/button_first"
+        android:id="@+id/fragment_shopping_scan_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Scan"
@@ -15,4 +15,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/fragment_shopping_title_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Shopping tracker"
+        android:textFontWeight="400"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_shopping_scan_button" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/storage_recycler_view_shopping_tracker_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_shopping_title_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

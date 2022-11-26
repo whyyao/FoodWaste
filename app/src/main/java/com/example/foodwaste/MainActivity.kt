@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.foodwaste.databinding.ActivityMainBinding
+import com.example.foodwaste.shopping.ShoppingFragment
 import com.example.foodwaste.storage.StockFragment
 
 class MainActivity : AppCompatActivity() {

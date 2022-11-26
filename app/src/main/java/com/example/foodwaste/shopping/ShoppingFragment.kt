@@ -1,4 +1,4 @@
-package com.example.foodwaste
+package com.example.foodwaste.shopping
 
 import android.content.Context
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.example.foodwaste.CaptureAct
 import com.example.foodwaste.databinding.FragmentShoppingBinding
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
@@ -74,9 +75,12 @@ class ShoppingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
+        binding.fragmentShoppingScanButton.setOnClickListener {
             scanCode()
         }
+        binding.storageRecyclerViewShoppingTrackerList.adapter = ShoppingListAdapter(
+            emptyList()
+        )
     }
 
     override fun onDestroyView() {
