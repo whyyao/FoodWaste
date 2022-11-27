@@ -2,10 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.FoodWaste" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">#486722</item>
-        <item name="colorSecondary">#59614C</item>
-        <item name="colorSecondaryContainer">#DDE6CC</item>
-        <item name="colorSurface">#FEFCF6</item>
+        <item name="colorPrimary">#EEEEEE</item>
+        <item name="colorSecondary">@color/buttons</item>
+        <item name="colorSecondaryContainer">#B0E976</item>
     </style>
 
     <style name="Theme.FoodWaste" parent="Base.Theme.FoodWaste" />

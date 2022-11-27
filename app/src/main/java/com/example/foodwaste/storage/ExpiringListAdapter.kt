@@ -1,15 +1,17 @@
 package com.example.foodwaste.storage
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodwaste.R
 import com.example.foodwaste.model.FoodItem
 
-class ExpiringListAdapter(private val mList: List<FoodItem>) :
+class ExpiringListAdapter(private val mList: List<FoodItem>, private val activity: Activity) :
     RecyclerView.Adapter<ExpiringListAdapter.ViewHolder>() {
 
     // create new views
@@ -32,6 +34,15 @@ class ExpiringListAdapter(private val mList: List<FoodItem>) :
 
         // sets the text to the textview from our itemHolder class
         holder.titleView.text = ItemsViewModel.name
+        holder.titleView.setTextColor(
+            ContextCompat.getColor(activity, R.color.white)
+        )
+        holder.dateView.setTextColor(
+            ContextCompat.getColor(activity, R.color.white_subtitle)
+        )
+        holder.co2View.setTextColor(
+            ContextCompat.getColor(activity, R.color.white_subtitle)
+        )
         holder.dateView.text = ItemsViewModel.expirationDate
         holder.co2View.text = "${ItemsViewModel.co2}kg"
         holder.pillView.isVisible = true

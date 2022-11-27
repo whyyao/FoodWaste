@@ -50,7 +50,8 @@ class StockFragment : Fragment() {
             stockList
         )
         binding.storageRecyclerViewExpiredList.adapter = ExpiringListAdapter(
-            expiringList
+            expiringList,
+            requireActivity()
         )
     }
 }
