@@ -11,10 +11,14 @@ import com.example.foodwaste.CaptureAct
 import com.example.foodwaste.R
 import com.example.foodwaste.databinding.FragmentShoppingBinding
 import com.example.foodwaste.model.FoodItem
+import com.example.foodwaste.testExpiringList
+import com.example.foodwaste.testStockList
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
+import java.lang.reflect.Type
 
 
 /**
@@ -74,6 +78,9 @@ class ShoppingFragment : Fragment() {
             emptyList(),
             requireActivity()
         )
+        binding.fragmentShoppingAddToStorageButton.setOnClickListener {
+            saveToStorage()
+        }
     }
 
     override fun onDestroyView() {
@@ -96,5 +103,24 @@ class ShoppingFragment : Fragment() {
             tempList.add(it)
             shoppingList = tempList
         }
+    }
+
+    private fun saveToStorage() {
+        val sharedPref = requireActivity().getPreferences(
+            Context.MODE_PRIVATE
+        )
+        val gson = Gson()
+        with(sharedPref?.edit() ?: return) {
+            val listType: Type = object : TypeToken<List<FoodItem?>?>() {}.type
+            val stockList =
+                Gson().fromJson<List<FoodItem>>(sharedPref.getString("stock", ""), listType)
+                    .orEmpty()
+            val tempList: MutableList<FoodItem> = mutableListOf()
+            tempList.addAll(stockList)
+            tempList.addAll(shoppingList)
+            putString("stock", gson.toJson(tempList))
+            apply()
+        }
+        shoppingList = emptyList()
     }
 }
