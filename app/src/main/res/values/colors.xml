@@ -7,4 +7,5 @@
     <color name="subtitle">#75796C</color>
     <color name="accent">#EFF2E3</color>
     <color name="expiring_pill_color">#FFDAD6</color>
+    <color name="repeated_item_color">#FFF5E8</color>
 </resources>

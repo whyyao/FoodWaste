@@ -70,7 +70,8 @@ class ShoppingFragment : Fragment() {
             scanCode()
         }
         binding.storageRecyclerViewShoppingTrackerList.adapter = ShoppingListAdapter(
-            emptyList()
+            emptyList(),
+            requireActivity()
         )
     }
 
@@ -94,14 +95,5 @@ class ShoppingFragment : Fragment() {
             tempList.add(it)
             shoppingList = tempList
         }
-
-//        val sharedPref = activity?.getPreferences(
-//            Context.MODE_PRIVATE
-//        )
-//        with(sharedPref?.edit() ?: return) {
-//            putString("shop_tracking", stream)
-//            apply()
-//        }
-
     }
 }

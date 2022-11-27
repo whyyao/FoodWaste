@@ -10,6 +10,8 @@ import com.example.foodwaste.R
 import com.example.foodwaste.databinding.FragmentStockBinding
 import com.example.foodwaste.model.FoodItem
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
 
 class StockFragment : Fragment() {
@@ -34,38 +36,21 @@ class StockFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // this creates a vertical layout Manager
-        binding.storageRecyclerViewStockList.adapter = StorageListAdapter(
-            testStockList
-        )
 
+        val sharedPref = requireActivity().getPreferences(
+            Context.MODE_PRIVATE
+        )
+        val listType: Type = object : TypeToken<List<FoodItem?>?>() {}.type
+        val gson = Gson()
+        val stockList =
+            gson.fromJson<List<FoodItem>>(sharedPref.getString("stock", ""), listType).orEmpty()
+        val expiringList =
+            gson.fromJson<List<FoodItem>>(sharedPref.getString("expiring", ""), listType).orEmpty()
+        binding.storageRecyclerViewStockList.adapter = StorageListAdapter(
+            stockList
+        )
         binding.storageRecyclerViewExpiredList.adapter = ExpiringListAdapter(
-            testExpiringList
+            expiringList
         )
     }
 }
-
-val testExpiringList = listOf(
-    FoodItem(
-        name = "Apple",
-        expirationDate = "2022-11-30",
-        co2 = 2
-    ),
-    FoodItem(
-        name = "Onions",
-        expirationDate = "2022-11-29",
-        co2 = 3
-    )
-)
-
-val testStockList = listOf(
-    FoodItem(
-        name = "Apple",
-        expirationDate = "2022-12-5",
-        co2 = 2
-    ),
-    FoodItem(
-        name = "Ginger",
-        expirationDate = "2022-12-10",
-        co2 = 1
-    )
-)
