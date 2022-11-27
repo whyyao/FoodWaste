@@ -34,10 +34,11 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/pill_bg"
+        android:gravity="center"
         android:paddingHorizontal="16dp"
         android:text="3 Days"
+        android:textAlignment="center"
         android:textSize="12sp"
-        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/storage_list_item_title"
         app:layout_constraintTop_toTopOf="parent" />
 
