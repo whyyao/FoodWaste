@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.foodwaste.CaptureAct
+import com.example.foodwaste.R
 import com.example.foodwaste.databinding.FragmentShoppingBinding
 import com.example.foodwaste.model.FoodItem
 import com.google.gson.Gson
@@ -57,10 +58,10 @@ class ShoppingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentShoppingBinding.inflate(inflater, container, false)
+        requireActivity().window.statusBarColor =
+            resources.getColor(android.R.color.background_light, null)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

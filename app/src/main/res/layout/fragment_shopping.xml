@@ -6,35 +6,58 @@
     android:layout_height="match_parent"
     tools:context=".shopping.ShoppingFragment">
 
-    <Button
-        android:id="@+id/fragment_shopping_scan_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/fragment_shopping_title_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
-        android:text="Shopping tracker"
+        android:text="Shopping Tracker"
         android:textFontWeight="400"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_shopping_scan_button" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/storage_recycler_view_shopping_tracker_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_shopping_title_text" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_shopping_scan_button"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/accent"
+        android:text="Scan"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fragment_shopping_add_to_storage_button" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_shopping_add_to_storage_button"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/white"
+        android:text="Add to Storage"
+        android:textColor="@color/accent"
+        android:textSize="20sp"
+        android:theme="@style/Widget.Material3.Button.OutlinedButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fragment_shopping_scan_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/accent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

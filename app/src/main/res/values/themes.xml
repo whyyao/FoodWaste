@@ -5,6 +5,7 @@
         <item name="colorPrimary">#EEEEEE</item>
         <item name="colorSecondary">@color/buttons</item>
         <item name="colorSecondaryContainer">#B0E976</item>
+        <item name="fontFamily">@font/lato</item>
     </style>
 
     <style name="Theme.FoodWaste" parent="Base.Theme.FoodWaste" />

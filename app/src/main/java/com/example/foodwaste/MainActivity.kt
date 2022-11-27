@@ -24,12 +24,6 @@ class MainActivity : AppCompatActivity() {
         // force bright mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        // setting gesture navigation bar color
-        val window: Window = this@MainActivity.window
-//        window.navigationBarColor =
-//            ContextCompat.getColor(this@MainActivity, R.color.gesture_navigation_color)
-
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
