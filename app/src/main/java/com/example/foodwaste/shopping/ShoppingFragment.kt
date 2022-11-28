@@ -76,7 +76,12 @@ class ShoppingFragment : Fragment() {
         }
         binding.storageRecyclerViewShoppingTrackerList.adapter = ShoppingListAdapter(
             emptyList(),
-            requireActivity()
+            requireActivity(),
+            cancel = {
+                val tempList = shoppingList.toMutableList()
+                tempList.remove(it)
+                shoppingList = tempList
+            }
         )
         binding.fragmentShoppingAddToStorageButton.setOnClickListener {
             saveToStorage()

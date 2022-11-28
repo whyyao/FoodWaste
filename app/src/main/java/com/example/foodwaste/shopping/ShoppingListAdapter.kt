@@ -20,7 +20,7 @@ import org.w3c.dom.Text
 import java.lang.reflect.Type
 
 
-class ShoppingListAdapter(private var mList: List<FoodItem>, private val activity: Activity) :
+class ShoppingListAdapter(private var mList: List<FoodItem>, private val activity: Activity, private val cancel: (foodItem: FoodItem) -> Unit ) :
     RecyclerView.Adapter<ShoppingListAdapter.ViewHolder>() {
 
     // create new views
@@ -71,6 +71,10 @@ class ShoppingListAdapter(private var mList: List<FoodItem>, private val activit
         holder.titleView.text = item.name
         holder.co2View.isVisible = false
         holder.co2IconView.isVisible = false
+        holder.cancelIcon.isVisible = true
+        holder.cancelIcon.setOnClickListener {
+            cancel.invoke(item)
+        }
 
     }
 
@@ -94,5 +98,6 @@ class ShoppingListAdapter(private var mList: List<FoodItem>, private val activit
         val co2IconView: ImageView = itemView.findViewById(R.id.storage_list_item_co2_icon)
         val pillView: TextView = itemView.findViewById(R.id.storage_list_item_pill)
         val backgroundLayout: ConstraintLayout = itemView.findViewById(R.id.storage_list_item_bg)
+        val cancelIcon: ImageView = itemView.findViewById(R.id.storage_list_item_cancel)
     }
 }
