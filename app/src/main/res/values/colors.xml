@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="default_surface_white">#EEEEEE</color>
+    <color name="check_box_color">#F9FFE9</color>
     <color name="white_subtitle">#EFF2E3</color>
     <color name="subtitle">#75796C</color>
     <color name="accent">#004845</color>

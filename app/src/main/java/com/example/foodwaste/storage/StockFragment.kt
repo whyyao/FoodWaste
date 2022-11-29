@@ -22,6 +22,13 @@ class StockFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val stockListAdapter: StorageListAdapter get() = binding.storageRecyclerViewStockList.adapter as StorageListAdapter
+    private val expiringListAdapter: ExpiringListAdapter get() = binding.storageRecyclerViewExpiredList.adapter as ExpiringListAdapter
+
+    private var expiringFoodList: List<FoodItem> = emptyList()
+        set(value) {
+            field = value
+            expiringListAdapter.update(value)
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +58,25 @@ class StockFragment : Fragment() {
         )
         binding.storageRecyclerViewExpiredList.adapter = ExpiringListAdapter(
             expiringList,
-            requireActivity()
+            requireActivity(),
+            isChecked = this::isChecked
         )
+        binding.fragmentStockUseButton.setOnClickListener {
+            expiringFoodList = expiringList.filter { !it.isChecked }
+            val sharedPref = requireActivity().getPreferences(
+                Context.MODE_PRIVATE
+            )
+            sharedPref?.edit()?.putString("expiring", Gson().toJson(expiringFoodList))?.apply()
+        }
+    }
+
+    private fun isChecked(foodItem: FoodItem, isChecked: Boolean) {
+        val tempList = expiringFoodList.toMutableList()
+        tempList.forEach { item ->
+            if (item.name == foodItem.name) {
+                item.isChecked = isChecked
+            }
+        }
+        expiringFoodList = tempList
     }
 }
