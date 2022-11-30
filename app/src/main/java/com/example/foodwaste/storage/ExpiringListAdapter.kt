@@ -46,7 +46,7 @@ class ExpiringListAdapter(private var mList: List<FoodItem>, private val activit
         )
         holder.dateView.text = item.expirationDate
         holder.co2View.text = "${item.co2}kg"
-        holder.pillView.isVisible = true
+        holder.pillView.isVisible = false
         holder.checkBoxView.isVisible = true
         holder.checkBoxView.setOnCheckedChangeListener { buttonView, isChecked ->
             isChecked(item, isChecked)

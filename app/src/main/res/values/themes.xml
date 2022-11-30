@@ -9,4 +9,5 @@
     </style>
 
     <style name="Theme.FoodWaste" parent="Base.Theme.FoodWaste" />
+
 </resources>

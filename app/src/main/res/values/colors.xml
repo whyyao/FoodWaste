@@ -4,11 +4,18 @@
     <color name="white">#FFFFFFFF</color>
     <color name="default_surface_white">#EEEEEE</color>
     <color name="check_box_color">#F9FFE9</color>
+    <color name="check_box_ticked">#27B564</color>
     <color name="white_subtitle">#EFF2E3</color>
     <color name="subtitle">#75796C</color>
     <color name="accent">#004845</color>
     <color name="buttons">#B0E976</color>
+
     <color name="expiring_pill_color">#FFDAD6</color>
+
     <color name="repeated_item_color">#FFF5E8</color>
     <color name="repeated_item_pill_color">#FFDEAA</color>
+
+    <color name="shared_item_pill_color">#DCE7C8</color>
+
+
 </resources>

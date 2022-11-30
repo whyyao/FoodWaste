@@ -60,7 +60,8 @@ class StockFragment : Fragment() {
         val expiringList =
             gson.fromJson<List<FoodItem>>(sharedPref.getString("expiring", ""), listType).orEmpty()
         binding.storageRecyclerViewStockList.adapter = StorageListAdapter(
-            stockList
+            stockList,
+            activity = requireActivity()
         )
         binding.storageRecyclerViewExpiredList.adapter = ExpiringListAdapter(
             expiringList,
@@ -75,6 +76,7 @@ class StockFragment : Fragment() {
                 Context.MODE_PRIVATE
             )
             sharedPref?.edit()?.putString("expiring", Gson().toJson(expiringFoodList))?.apply()
+            checkViewState()
         }
         binding.fragmentStockShareButton.setOnClickListener {
             val toAddList = expiringFoodList.filter { it.isChecked }
@@ -93,6 +95,7 @@ class StockFragment : Fragment() {
             tempList.addAll(stockFoodList)
             stockFoodList = tempList
             sharedPref?.edit()?.putString("stock", Gson().toJson(stockFoodList))?.apply()
+            checkViewState()
         }
     }
 

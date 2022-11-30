@@ -83,15 +83,17 @@
         android:textColor="@color/subtitle"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/storage_list_item_co2_icon"
-        app:layout_constraintTop_toBottomOf="@id/storage_list_item_title" />
+        app:layout_constraintTop_toBottomOf="@id/storage_list_item_title"
+        app:layout_goneMarginStart="2dp" />
 
-    <CheckBox
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/storage_list_item_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:buttonTint="@color/check_box_color"
-        app:buttonIconTint="@color/accent"
+        android:visibility="gone"
+        app:buttonIconTint="@color/check_box_ticked"
+        app:buttonTint="@color/check_box_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -106,6 +108,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/storage_list_item_shared_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_share"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/storage_list_item_shared_text"
+        app:layout_constraintStart_toStartOf="@id/storage_list_item_title"
+        app:layout_constraintTop_toTopOf="@id/storage_list_item_shared_text" />
+
+
+    <TextView
+        android:id="@+id/storage_list_item_shared_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:text="Shared"
+        android:textColor="@color/subtitle"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/storage_list_item_shared_icon"
+        app:layout_constraintTop_toBottomOf="@id/storage_list_item_date" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
