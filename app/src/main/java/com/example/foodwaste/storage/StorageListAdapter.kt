@@ -29,11 +29,6 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val item = mList[position]
-
-        // sets the image to the imageview from our itemHolder class
-//        holder.imageView.setImageResource(ItemsViewModel.image)
-
-        // sets the text to the textview from our itemHolder class
         holder.titleView.text = item.name
         holder.dateView.text = item.expirationDate
         holder.co2View.text = "${item.co2}kg"
@@ -43,7 +38,7 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
             holder.pillView.isVisible = true
             holder.pillView.text = "Shared"
             holder.pillView.background =
-                ContextCompat.getDrawable(activity, R.drawable.pill_bg_repeated)
+                ContextCompat.getDrawable(activity, R.drawable.pill_bg_shared)
 
             // Share View
             holder.shareView.isVisible = true

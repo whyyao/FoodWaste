@@ -28,8 +28,6 @@ class ShoppingFragment : Fragment() {
 
     private var _binding: FragmentShoppingBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     private var shoppingList: List<FoodItem> = emptyList()
         set(value) {

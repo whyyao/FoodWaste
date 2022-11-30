@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.foodwaste.R
+import com.example.foodwaste.StorageUtils
 import com.example.foodwaste.databinding.FragmentStockBinding
 import com.example.foodwaste.model.FoodItem
 import com.google.gson.Gson
@@ -41,24 +42,16 @@ class StockFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentStockBinding.inflate(inflater, container, false)
-        requireActivity().window.statusBarColor =
-            resources.getColor(R.color.accent, requireActivity().theme)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // this creates a vertical layout Manager
 
-        val sharedPref = requireActivity().getPreferences(
-            Context.MODE_PRIVATE
-        )
-        val listType: Type = object : TypeToken<List<FoodItem?>?>() {}.type
-        val gson = Gson()
-        val stockList =
-            gson.fromJson<List<FoodItem>>(sharedPref.getString("stock", ""), listType).orEmpty()
-        val expiringList =
-            gson.fromJson<List<FoodItem>>(sharedPref.getString("expiring", ""), listType).orEmpty()
+        val stockList = StorageUtils.getStockFoodList(requireActivity())
+        val expiringList = StorageUtils.getExpiringFoodList(requireActivity())
+
+        // Adapters
         binding.storageRecyclerViewStockList.adapter = StorageListAdapter(
             stockList,
             activity = requireActivity()
@@ -68,23 +61,21 @@ class StockFragment : Fragment() {
             requireActivity(),
             isChecked = this::isChecked
         )
+
+        // Assign Data
         stockFoodList = stockList
         expiringFoodList = expiringList
+
+
         binding.fragmentStockUseButton.setOnClickListener {
             expiringFoodList = expiringFoodList.filter { !it.isChecked }
-            val sharedPref = requireActivity().getPreferences(
-                Context.MODE_PRIVATE
-            )
-            sharedPref?.edit()?.putString("expiring", Gson().toJson(expiringFoodList))?.apply()
+            StorageUtils.saveToExpiringFoodList(requireActivity(), expiringFoodList)
             checkViewState()
         }
         binding.fragmentStockShareButton.setOnClickListener {
             val toAddList = expiringFoodList.filter { it.isChecked }
             expiringFoodList = expiringFoodList.filter { !it.isChecked }
-            val sharedPref = requireActivity().getPreferences(
-                Context.MODE_PRIVATE
-            )
-            sharedPref?.edit()?.putString("expiring", Gson().toJson(expiringFoodList))?.apply()
+            StorageUtils.saveToExpiringFoodList(requireActivity(), expiringFoodList)
 
             val tempList = mutableListOf<FoodItem>()
             toAddList.forEach {
@@ -94,9 +85,10 @@ class StockFragment : Fragment() {
             }
             tempList.addAll(stockFoodList)
             stockFoodList = tempList
-            sharedPref?.edit()?.putString("stock", Gson().toJson(stockFoodList))?.apply()
+            StorageUtils.saveToStockFoodList(requireActivity(), stockFoodList)
             checkViewState()
         }
+        checkViewState()
     }
 
     private fun isChecked(foodItem: FoodItem, isChecked: Boolean) {
@@ -111,12 +103,16 @@ class StockFragment : Fragment() {
 
     private fun checkViewState() {
         if (expiringFoodList.isEmpty()) {
+            requireActivity().window.statusBarColor =
+                resources.getColor(R.color.white, null)
             binding.fragmentStockExpiringText.isVisible = false
             binding.storageRecyclerViewExpiredList.isVisible = false
             binding.fragmentStockBackground.isVisible = false
             binding.fragmentStockUseButton.isVisible = false
             binding.fragmentStockShareButton.isVisible = false
         } else {
+            requireActivity().window.statusBarColor =
+                resources.getColor(R.color.accent, null)
             binding.fragmentStockExpiringText.isVisible = true
             binding.storageRecyclerViewExpiredList.isVisible = true
             binding.fragmentStockBackground.isVisible = true
