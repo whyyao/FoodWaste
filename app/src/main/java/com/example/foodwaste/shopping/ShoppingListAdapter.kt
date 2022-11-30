@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodwaste.R
+import com.example.foodwaste.StorageUtils
 import com.example.foodwaste.model.FoodItem
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -65,6 +66,7 @@ class ShoppingListAdapter(private var mList: List<FoodItem>, private val activit
         holder.cancelIcon.setOnClickListener {
             cancel.invoke(item)
         }
+        holder.thumbnailView.setBackgroundResource(StorageUtils.getPictureResourceId(item.name))
 
     }
 
@@ -89,5 +91,7 @@ class ShoppingListAdapter(private var mList: List<FoodItem>, private val activit
         val pillView: TextView = itemView.findViewById(R.id.storage_list_item_pill)
         val backgroundLayout: ConstraintLayout = itemView.findViewById(R.id.storage_list_item_bg)
         val cancelIcon: ImageView = itemView.findViewById(R.id.storage_list_item_cancel)
+        val thumbnailView: ImageView = itemView.findViewById(R.id.storage_list_item_thumbnail)
+
     }
 }

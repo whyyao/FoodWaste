@@ -1,6 +1,5 @@
 package com.example.foodwaste.storage
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +10,7 @@ import com.example.foodwaste.R
 import com.example.foodwaste.StorageUtils
 import com.example.foodwaste.databinding.FragmentStockBinding
 import com.example.foodwaste.model.FoodItem
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.lang.reflect.Type
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class StockFragment : Fragment() {
@@ -70,6 +67,12 @@ class StockFragment : Fragment() {
         binding.fragmentStockUseButton.setOnClickListener {
             expiringFoodList = expiringFoodList.filter { !it.isChecked }
             StorageUtils.saveToExpiringFoodList(requireActivity(), expiringFoodList)
+            MaterialAlertDialogBuilder(requireContext(),
+                R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+                .setTitle("Congratulations!")
+                .setMessage("You’ve reduced 10 kg CO2 emissions")
+                .setPositiveButton("Ok", null)
+                .show()
             checkViewState()
         }
         binding.fragmentStockShareButton.setOnClickListener {

@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodwaste.R
+import com.example.foodwaste.StorageUtils
 import com.example.foodwaste.model.FoodItem
 
 class ExpiringListAdapter(private var mList: List<FoodItem>, private val activity: Activity, private val isChecked: (FoodItem, Boolean) -> Unit) :
@@ -51,6 +53,7 @@ class ExpiringListAdapter(private var mList: List<FoodItem>, private val activit
         holder.checkBoxView.setOnCheckedChangeListener { buttonView, isChecked ->
             isChecked(item, isChecked)
         }
+        holder.thumbnailView.setBackgroundResource(StorageUtils.getPictureResourceId(item.name))
     }
 
     // return the number of the items in the list
@@ -71,5 +74,7 @@ class ExpiringListAdapter(private var mList: List<FoodItem>, private val activit
         val co2View: TextView = itemView.findViewById(R.id.storage_list_item_co2)
         val pillView: TextView = itemView.findViewById(R.id.storage_list_item_pill)
         val checkBoxView: CheckBox = itemView.findViewById(R.id.storage_list_item_check_box)
+        val thumbnailView: ImageView = itemView.findViewById(R.id.storage_list_item_thumbnail)
+
     }
 }

@@ -10,4 +10,25 @@
 
     <style name="Theme.FoodWaste" parent="Base.Theme.FoodWaste" />
 
+    <style name="Body_ThemeOverlay.MaterialComponents.MaterialAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogBodyTextStyle">
+            @style/BodyMaterialAlertDialog.MaterialComponents.Body.Text
+        </item>
+        <item name="materialAlertDialogTitleTextStyle">
+            @style/BodyMaterialAlertDialog.MaterialComponents.Title.Text
+        </item>
+
+        <item name="android:background">@color/accent</item>
+    </style>
+
+    <style name="BodyMaterialAlertDialog.MaterialComponents.Body.Text" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/white</item>
+                <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="BodyMaterialAlertDialog.MaterialComponents.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/white</item>
+                <item name="android:textSize">24sp</item>
+                <item name="android:textStyle">bold</item>
+    </style>
 </resources>

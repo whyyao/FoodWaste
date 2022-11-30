@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
 val testExpiringList = listOf(
     FoodItem(
-        name = "Apple",
+        name = "Cauliflowers",
         expirationDate = "Dec 3",
         co2 = 2
     ),
@@ -88,12 +88,12 @@ val testExpiringList = listOf(
 
 val testStockList = listOf(
     FoodItem(
-        name = "Apple",
+        name = "Tomatoes",
         expirationDate = "Dec 10",
         co2 = 2
     ),
     FoodItem(
-        name = "Ginger",
+        name = "Aubergine",
         expirationDate = "Dec 20",
         co2 = 1
     )

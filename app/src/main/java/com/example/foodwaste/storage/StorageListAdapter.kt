@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodwaste.R
+import com.example.foodwaste.StorageUtils
 import com.example.foodwaste.model.FoodItem
 
 class StorageListAdapter(private var mList: List<FoodItem>, private val activity: Activity) :
@@ -32,6 +33,7 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
         holder.titleView.text = item.name
         holder.dateView.text = item.expirationDate
         holder.co2View.text = "${item.co2}kg"
+        holder.thumbnailView.setBackgroundResource(StorageUtils.getPictureResourceId(item.name))
 
         if (item.isShared) {
             // Pills
@@ -70,5 +72,6 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
         val pillView: TextView = itemView.findViewById(R.id.storage_list_item_pill)
         val shareView: TextView = itemView.findViewById(R.id.storage_list_item_shared_text)
         val shareIcon: ImageView = itemView.findViewById(R.id.storage_list_item_shared_icon)
+        val thumbnailView: ImageView = itemView.findViewById(R.id.storage_list_item_thumbnail)
     }
 }

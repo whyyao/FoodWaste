@@ -42,4 +42,18 @@ object StorageUtils {
         )
         sharedPref?.edit()?.putString("stock", Gson().toJson(list))?.apply()
     }
+
+    fun getPictureResourceId(name: String): Int {
+        return when (name) {
+            "Cauliflowers" -> R.drawable.cauliflowers
+            "Carrot" -> R.drawable.carrots
+            "Aubergine" -> R.drawable.eggplants
+            "Green Onions" -> R.drawable.green_onions
+            "Mushroom" -> R.drawable.mushroom
+            "Shrimps" -> R.drawable.shrimps
+            "Tomatoes" -> R.drawable.tomatoes
+            "Onions" -> R.drawable.onions
+            else -> R.drawable.carrots
+        }
+    }
 }
