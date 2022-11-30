@@ -4,5 +4,6 @@ data class FoodItem(
     val name: String = "",
     val expirationDate: String = "",
     val co2: Int = 0,
-    var isChecked: Boolean = false
+    var isChecked: Boolean = false,
+    var isShared: Boolean = false
 )

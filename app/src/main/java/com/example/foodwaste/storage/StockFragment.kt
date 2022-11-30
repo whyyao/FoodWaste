@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.foodwaste.R
 import com.example.foodwaste.databinding.FragmentStockBinding
@@ -28,6 +29,11 @@ class StockFragment : Fragment() {
         set(value) {
             field = value
             expiringListAdapter.update(value)
+        }
+    private var stockFoodList: List<FoodItem> = emptyList()
+        set(value) {
+            field = value
+            stockListAdapter.update(value)
         }
 
     override fun onCreateView(
@@ -61,12 +67,32 @@ class StockFragment : Fragment() {
             requireActivity(),
             isChecked = this::isChecked
         )
+        stockFoodList = stockList
+        expiringFoodList = expiringList
         binding.fragmentStockUseButton.setOnClickListener {
-            expiringFoodList = expiringList.filter { !it.isChecked }
+            expiringFoodList = expiringFoodList.filter { !it.isChecked }
             val sharedPref = requireActivity().getPreferences(
                 Context.MODE_PRIVATE
             )
             sharedPref?.edit()?.putString("expiring", Gson().toJson(expiringFoodList))?.apply()
+        }
+        binding.fragmentStockShareButton.setOnClickListener {
+            val toAddList = expiringFoodList.filter { it.isChecked }
+            expiringFoodList = expiringFoodList.filter { !it.isChecked }
+            val sharedPref = requireActivity().getPreferences(
+                Context.MODE_PRIVATE
+            )
+            sharedPref?.edit()?.putString("expiring", Gson().toJson(expiringFoodList))?.apply()
+
+            val tempList = mutableListOf<FoodItem>()
+            toAddList.forEach {
+                tempList.add(it.apply {
+                    it.isShared = true
+                })
+            }
+            tempList.addAll(stockFoodList)
+            stockFoodList = tempList
+            sharedPref?.edit()?.putString("stock", Gson().toJson(stockFoodList))?.apply()
         }
     }
 
@@ -78,5 +104,21 @@ class StockFragment : Fragment() {
             }
         }
         expiringFoodList = tempList
+    }
+
+    private fun checkViewState() {
+        if (expiringFoodList.isEmpty()) {
+            binding.fragmentStockExpiringText.isVisible = false
+            binding.storageRecyclerViewExpiredList.isVisible = false
+            binding.fragmentStockBackground.isVisible = false
+            binding.fragmentStockUseButton.isVisible = false
+            binding.fragmentStockShareButton.isVisible = false
+        } else {
+            binding.fragmentStockExpiringText.isVisible = true
+            binding.storageRecyclerViewExpiredList.isVisible = true
+            binding.fragmentStockBackground.isVisible = true
+            binding.fragmentStockUseButton.isVisible = true
+            binding.fragmentStockShareButton.isVisible = true
+        }
     }
 }

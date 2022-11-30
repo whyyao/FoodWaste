@@ -56,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="Remind"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/fragment_stock_use_button"
         app:layout_constraintTop_toBottomOf="@id/storage_recycler_view_expired_list"
         app:strokeColor="@color/white" />
