@@ -46,6 +46,7 @@
         android:id="@+id/storage_list_item_calendar_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
         android:src="@drawable/ic_calendar"
         app:layout_constraintBottom_toBottomOf="@id/storage_list_item_date"
         app:layout_constraintStart_toStartOf="@id/storage_list_item_title"
@@ -83,8 +84,7 @@
         android:textColor="@color/subtitle"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/storage_list_item_co2_icon"
-        app:layout_constraintTop_toBottomOf="@id/storage_list_item_title"
-        app:layout_goneMarginStart="2dp" />
+        app:layout_constraintTop_toBottomOf="@id/storage_list_item_title" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/storage_list_item_check_box"

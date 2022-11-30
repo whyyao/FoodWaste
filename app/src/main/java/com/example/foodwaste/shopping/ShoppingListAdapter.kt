@@ -23,25 +23,15 @@ import java.lang.reflect.Type
 class ShoppingListAdapter(private var mList: List<FoodItem>, private val activity: Activity, private val cancel: (foodItem: FoodItem) -> Unit ) :
     RecyclerView.Adapter<ShoppingListAdapter.ViewHolder>() {
 
-    // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        // inflates the card_view_design view
-        // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.storage_list_item, parent, false)
 
         return ViewHolder(view)
     }
 
-    // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val item = mList[position]
-
-        // sets the image to the imageview from our itemHolder class
-//        holder.imageView.setImageResource(ItemsViewModel.image)
-
-        // sets the text to the textview from our itemHolder class
         val sharedPref = activity.getPreferences(
             Context.MODE_PRIVATE
         )

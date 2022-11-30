@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         val shoppingFragment = ShoppingFragment()
         val stockFragment = StockFragment()
+        val achievementFragment = AchievementFragment()
 
         val sharedPref = getPreferences(
             Context.MODE_PRIVATE
@@ -60,6 +61,12 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
+                R.id.pg_profile -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, achievementFragment)
+                        .commit()
+                    true
+                }
                 else -> false
             }
         }
@@ -69,12 +76,12 @@ class MainActivity : AppCompatActivity() {
 val testExpiringList = listOf(
     FoodItem(
         name = "Apple",
-        expirationDate = "2022-11-30",
+        expirationDate = "Dec 3",
         co2 = 2
     ),
     FoodItem(
         name = "Onions",
-        expirationDate = "2022-11-29",
+        expirationDate = "Dec 4",
         co2 = 3
     )
 )
@@ -82,12 +89,12 @@ val testExpiringList = listOf(
 val testStockList = listOf(
     FoodItem(
         name = "Apple",
-        expirationDate = "2022-12-5",
+        expirationDate = "Dec 10",
         co2 = 2
     ),
     FoodItem(
         name = "Ginger",
-        expirationDate = "2022-12-10",
+        expirationDate = "Dec 20",
         co2 = 1
     )
 )
