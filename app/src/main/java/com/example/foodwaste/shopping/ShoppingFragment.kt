@@ -8,11 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.foodwaste.CaptureAct
-import com.example.foodwaste.R
 import com.example.foodwaste.databinding.FragmentShoppingBinding
 import com.example.foodwaste.model.FoodItem
-import com.example.foodwaste.testExpiringList
-import com.example.foodwaste.testStockList
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.journeyapps.barcodescanner.ScanContract

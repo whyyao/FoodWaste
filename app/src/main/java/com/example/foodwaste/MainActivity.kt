@@ -37,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         // Clean shared prefs
         sharedPref.edit().clear().apply()
         val gson = Gson()
+        val mode: Int = intent.extras?.getInt("mode") ?: 1
+        val testExpiringList = if (mode == 1) testExpiringList1 else testExpiringList2
+        val testStockList = if (mode == 1) testStockList1 else testStockList2
         with(sharedPref?.edit() ?: return) {
             putString("expiring", gson.toJson(testExpiringList))
             putString("stock", gson.toJson(testStockList))
@@ -73,7 +76,9 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-val testExpiringList = listOf(
+val testExpiringList1 = emptyList<FoodItem>()
+
+val testExpiringList2 = listOf(
     FoodItem(
         name = "Cauliflowers",
         expirationDate = "Dec 3",
@@ -86,16 +91,29 @@ val testExpiringList = listOf(
     )
 )
 
-val testStockList = listOf(
+val testStockList1 = listOf(
     FoodItem(
         name = "Tomatoes",
         expirationDate = "Dec 3",
         co2 = 2
     ),
     FoodItem(
-        name = "Aubergine",
-        expirationDate = "Dec 4",
+        name = "Corns",
+        expirationDate = "Dec 20",
         co2 = 1
+    ),
+    FoodItem(
+        name = "Green Onions",
+        expirationDate = "Dec 20",
+        co2 = 1
+    )
+)
+
+val testStockList2 = listOf(
+    FoodItem(
+        name = "Onions",
+        expirationDate = "Dec 3",
+        co2 = 2
     ),
     FoodItem(
         name = "Corns",
