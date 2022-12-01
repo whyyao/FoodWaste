@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:backgroundTint="@color/buttons"
-        android:text="Use"
+        android:text="Consume"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/storage_recycler_view_expired_list" />
@@ -69,6 +69,18 @@
         android:layout_marginEnd="8dp"
         android:text="Share"
         app:layout_constraintEnd_toStartOf="@id/fragment_stock_remind_button"
+        app:layout_constraintTop_toBottomOf="@id/storage_recycler_view_expired_list"
+        app:strokeColor="@color/white" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_stock_dismiss_button"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Dismiss"
+        app:layout_constraintEnd_toStartOf="@id/fragment_stock_share_button"
         app:layout_constraintTop_toBottomOf="@id/storage_recycler_view_expired_list"
         app:strokeColor="@color/white" />
 

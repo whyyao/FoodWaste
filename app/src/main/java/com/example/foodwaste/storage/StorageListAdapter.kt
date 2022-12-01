@@ -39,22 +39,6 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
         holder.thumbnailView.setBackgroundResource(StorageUtils.getPictureResourceId(item.name))
         holder.pillView.isVisible = false
 
-        if (item.isShared) {
-            // Pills
-            holder.pillView.isVisible = true
-            holder.pillView.text = "Shared"
-            holder.pillView.background =
-                ContextCompat.getDrawable(activity, R.drawable.pill_bg_shared)
-
-            // Share View
-            holder.shareView.isVisible = true
-            holder.shareIcon.isVisible = true
-            holder.shareView.text = "You are sharing this item with your flatmates"
-        } else {
-            holder.shareView.isVisible = false
-            holder.shareIcon.isVisible = false
-        }
-
         // Pills
         val sdf = SimpleDateFormat("dd/MM/yyyy")
         val strDate: Date = sdf.parse(item.expirationDate)
@@ -63,7 +47,6 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
         val minus4days = localTime.minusDays(4).toLocalDate()
         val minus3days = localTime.minusDays(3).toLocalDate()
         val minus2days = localTime.minusDays(2).toLocalDate()
-        val minus1days = localTime.minusDays(1).toLocalDate()
         holder.pillView.isVisible = true
         holder.pillView.background =
             ContextCompat.getDrawable(activity, R.drawable.pill_bg)
@@ -79,18 +62,22 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
         } else {
             holder.pillView.isVisible = false
         }
-//
-//
-//
-//        else if (now.isAfter(minus3days) && now.isBefore(minus4days)) {
-//            holder.pillView.text = "3 Days"
-//        } else if (now.isAfter(minus2days) && now.isBefore(minus3days)) {
-//            holder.pillView.text = "2 Days"
-//        } else if () {
-//            holder.pillView.text = "1 Days"
-//        } else {
-//            holder.pillView.isVisible = false
-//        }
+
+        if (item.isShared) {
+            // Pills
+            holder.pillView.isVisible = true
+            holder.pillView.text = "Shared"
+            holder.pillView.background =
+                ContextCompat.getDrawable(activity, R.drawable.pill_bg_shared)
+
+            // Share View
+            holder.shareView.isVisible = true
+            holder.shareIcon.isVisible = true
+            holder.shareView.text = "Item is shared in your flat"
+        } else {
+            holder.shareView.isVisible = false
+            holder.shareIcon.isVisible = false
+        }
 
         val displayDateFormat = SimpleDateFormat("MMM dd")
         holder.dateView.text = displayDateFormat.format(strDate)

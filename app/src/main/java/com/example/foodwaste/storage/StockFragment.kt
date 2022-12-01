@@ -70,8 +70,10 @@ class StockFragment : Fragment() {
             }
             expiringFoodList = expiringFoodList.filter { !it.isChecked }
             StorageUtils.saveToExpiringFoodList(requireActivity(), expiringFoodList)
-            MaterialAlertDialogBuilder(requireContext(),
-                R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+            MaterialAlertDialogBuilder(
+                requireContext(),
+                R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog
+            )
                 .setTitle("Congratulations!")
                 .setMessage("You’ve reduced 10 kg CO2 emissions")
                 .setPositiveButton("Ok", null)
@@ -89,6 +91,18 @@ class StockFragment : Fragment() {
                     it.isShared = true
                 })
             }
+            tempList.addAll(stockFoodList)
+            stockFoodList = tempList
+            StorageUtils.saveToStockFoodList(requireActivity(), stockFoodList)
+            checkViewState()
+        }
+        binding.fragmentStockDismissButton.setOnClickListener {
+            val toAddList = expiringFoodList.filter { it.isChecked }
+            expiringFoodList = expiringFoodList.filter { !it.isChecked }
+            StorageUtils.saveToExpiringFoodList(requireActivity(), expiringFoodList)
+
+            val tempList = mutableListOf<FoodItem>()
+            tempList.addAll(toAddList)
             tempList.addAll(stockFoodList)
             stockFoodList = tempList
             StorageUtils.saveToStockFoodList(requireActivity(), stockFoodList)
