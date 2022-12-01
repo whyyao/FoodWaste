@@ -89,21 +89,16 @@ val testExpiringList = listOf(
 val testStockList = listOf(
     FoodItem(
         name = "Tomatoes",
-        expirationDate = "Dec 10",
+        expirationDate = "Dec 3",
         co2 = 2
     ),
     FoodItem(
         name = "Aubergine",
-        expirationDate = "Dec 20",
+        expirationDate = "Dec 4",
         co2 = 1
     ),
     FoodItem(
         name = "Corns",
-        expirationDate = "Dec 20",
-        co2 = 1
-    ),
-    FoodItem(
-        name = "Mushroom",
         expirationDate = "Dec 20",
         co2 = 1
     ),
