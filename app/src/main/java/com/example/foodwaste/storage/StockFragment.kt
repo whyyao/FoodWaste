@@ -68,14 +68,16 @@ class StockFragment : Fragment() {
             if (expiringList.all { !it.isChecked }) {
                 return@setOnClickListener
             }
+            val usedList = expiringFoodList.filter { it.isChecked }
+            val sumOfCo2 = usedList.sumOf { it.co2 }
             expiringFoodList = expiringFoodList.filter { !it.isChecked }
             StorageUtils.saveToExpiringFoodList(requireActivity(), expiringFoodList)
             MaterialAlertDialogBuilder(
                 requireContext(),
                 R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog
             )
-                .setTitle("Congratulations!")
-                .setMessage("You’ve reduced 10 kg CO2 emissions")
+                .setTitle("THANK YOU!")
+                .setMessage("You’ve consumed your food and avoided $sumOfCo2 kg CO2 emission.")
                 .setPositiveButton("Ok", null)
                 .show()
             checkViewState()
@@ -130,6 +132,7 @@ class StockFragment : Fragment() {
             binding.fragmentStockBackground.isVisible = false
             binding.fragmentStockUseButton.isVisible = false
             binding.fragmentStockShareButton.isVisible = false
+            binding.fragmentStockDismissButton.isVisible = false
         } else {
             requireActivity().window.statusBarColor =
                 resources.getColor(R.color.accent, null)
@@ -138,6 +141,7 @@ class StockFragment : Fragment() {
             binding.fragmentStockBackground.isVisible = true
             binding.fragmentStockUseButton.isVisible = true
             binding.fragmentStockShareButton.isVisible = true
+            binding.fragmentStockDismissButton.isVisible = true
         }
     }
 }

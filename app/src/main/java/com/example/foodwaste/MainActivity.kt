@@ -116,7 +116,7 @@ val testStockList2 = listOf(
         co2 = 2
     ),
     FoodItem(
-        name = "Corns",
+        name = "Corn",
         expirationDate = "3/12/2022",
         co2 = 1
     ),

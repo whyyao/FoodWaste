@@ -71,6 +71,7 @@ object StorageUtils {
             "Shrimps" -> R.drawable.shrimps
             "Tomatoes" -> R.drawable.tomatoes
             "Onions" -> R.drawable.onions
+            "Corn" -> R.drawable.corns
             else -> R.drawable.carrots
         }
     }
