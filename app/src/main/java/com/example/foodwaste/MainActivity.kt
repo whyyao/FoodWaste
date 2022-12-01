@@ -81,12 +81,12 @@ val testExpiringList1 = emptyList<FoodItem>()
 val testExpiringList2 = listOf(
     FoodItem(
         name = "Cauliflowers",
-        expirationDate = "Dec 3",
+        expirationDate = "3/12/2022",
         co2 = 2
     ),
     FoodItem(
         name = "Onions",
-        expirationDate = "Dec 4",
+        expirationDate = "4/12/2022",
         co2 = 3
     )
 )
@@ -94,17 +94,17 @@ val testExpiringList2 = listOf(
 val testStockList1 = listOf(
     FoodItem(
         name = "Tomatoes",
-        expirationDate = "Dec 3",
+        expirationDate = "5/12/2022",
         co2 = 2
     ),
     FoodItem(
         name = "Corns",
-        expirationDate = "Dec 20",
+        expirationDate = "20/12/2022",
         co2 = 1
     ),
     FoodItem(
         name = "Green Onions",
-        expirationDate = "Dec 20",
+        expirationDate = "20/12/2022",
         co2 = 1
     )
 )
@@ -112,17 +112,17 @@ val testStockList1 = listOf(
 val testStockList2 = listOf(
     FoodItem(
         name = "Onions",
-        expirationDate = "Dec 3",
+        expirationDate = "2/12/2022",
         co2 = 2
     ),
     FoodItem(
         name = "Corns",
-        expirationDate = "Dec 20",
+        expirationDate = "20/12/2022",
         co2 = 1
     ),
     FoodItem(
         name = "Green Onions",
-        expirationDate = "Dec 20",
+        expirationDate = "20/12/2022",
         co2 = 1
     )
 )

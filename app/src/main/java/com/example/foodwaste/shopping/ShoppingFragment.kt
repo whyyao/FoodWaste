@@ -1,6 +1,5 @@
 package com.example.foodwaste.shopping
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater

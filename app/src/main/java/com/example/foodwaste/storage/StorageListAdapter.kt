@@ -12,6 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.foodwaste.R
 import com.example.foodwaste.StorageUtils
 import com.example.foodwaste.model.FoodItem
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.*
 
 class StorageListAdapter(private var mList: List<FoodItem>, private val activity: Activity) :
     RecyclerView.Adapter<StorageListAdapter.ViewHolder>() {
@@ -28,12 +33,11 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
 
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val item = mList[position]
         holder.titleView.text = item.name
-        holder.dateView.text = item.expirationDate
         holder.co2View.text = "${item.co2}kg"
         holder.thumbnailView.setBackgroundResource(StorageUtils.getPictureResourceId(item.name))
+        holder.pillView.isVisible = false
 
         if (item.isShared) {
             // Pills
@@ -50,6 +54,21 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
             holder.shareView.isVisible = false
             holder.shareIcon.isVisible = false
         }
+
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val strDate: Date = sdf.parse(item.expirationDate)
+        val localTime: LocalDateTime =
+            LocalDateTime.ofInstant(strDate.toInstant(), ZoneId.systemDefault())
+        val minus3days = localTime.minusDays(3).toLocalDate()
+        if (LocalDate.now().isAfter(minus3days)) {
+            // Pills
+            holder.pillView.isVisible = true
+            holder.pillView.text = "3 Days"
+            holder.pillView.background =
+                ContextCompat.getDrawable(activity, R.drawable.pill_bg)
+        }
+        val displayDateFormat = SimpleDateFormat("MMM dd")
+        holder.dateView.text = displayDateFormat.format(strDate)
     }
 
     // return the number of the items in the list
