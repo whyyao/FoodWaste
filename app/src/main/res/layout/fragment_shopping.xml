@@ -38,7 +38,7 @@
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/accent"
         android:text="Scan"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/fragment_shopping_add_to_storage_button" />
@@ -53,7 +53,7 @@
         android:backgroundTint="@color/white"
         android:text="Add to Storage"
         android:textColor="@color/accent"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:theme="@style/Widget.Material3.Button.OutlinedButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/fragment_shopping_scan_button"
