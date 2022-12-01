@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.foodwaste.CaptureAct
+import com.example.foodwaste.R
 import com.example.foodwaste.databinding.FragmentShoppingBinding
 import com.example.foodwaste.model.FoodItem
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.journeyapps.barcodescanner.ScanContract
@@ -29,6 +32,7 @@ class ShoppingFragment : Fragment() {
         set(value) {
             field = value
             adapter.update(value)
+            checkViewState()
         }
 
     private val adapter get() = binding.storageRecyclerViewShoppingTrackerList.adapter as ShoppingListAdapter
@@ -80,6 +84,7 @@ class ShoppingFragment : Fragment() {
         binding.fragmentShoppingAddToStorageButton.setOnClickListener {
             saveToStorage()
         }
+        checkViewState()
     }
 
     override fun onDestroyView() {
@@ -97,11 +102,23 @@ class ShoppingFragment : Fragment() {
     }
 
     private fun itemScanned(stream: String) {
-        Gson().fromJson(stream, FoodItem::class.java)?.let {
-            val tempList = shoppingList.toMutableList()
-            tempList.add(it)
-            shoppingList = tempList
+        try {
+            Gson().fromJson(stream, FoodItem::class.java)?.let {
+                val tempList = shoppingList.toMutableList()
+                tempList.add(it)
+                shoppingList = tempList
+            }
+        } catch (e: java.lang.Exception) {
+            MaterialAlertDialogBuilder(
+                requireContext(),
+                R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog
+            )
+                .setTitle("Oops!")
+                .setMessage("Unrecognized code")
+                .setPositiveButton("Ok", null)
+                .show()
         }
+
     }
 
     private fun saveToStorage() {
@@ -121,5 +138,10 @@ class ShoppingFragment : Fragment() {
             apply()
         }
         shoppingList = emptyList()
+        checkViewState()
+    }
+
+    private fun checkViewState() {
+        binding.fragmentShoppingAddToStorageButton.isVisible = shoppingList.isNotEmpty()
     }
 }
