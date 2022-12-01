@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodwaste.R
 import com.example.foodwaste.StorageUtils
+import com.example.foodwaste.StringUtils
 import com.example.foodwaste.model.FoodItem
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -52,7 +53,6 @@ class ShoppingListAdapter(
                 holder.pillView.background =
                     ContextCompat.getDrawable(activity, R.drawable.pill_bg_repeated)
 
-                // Date text
                 holder.shareIcon.isVisible = true
                 holder.shareView.isVisible = true
                 holder.shareIcon.setImageDrawable(
@@ -78,6 +78,7 @@ class ShoppingListAdapter(
         holder.cancelIcon.setOnClickListener {
             cancel.invoke(item)
         }
+        holder.dateView.text = StringUtils.getPrettyDate(item.expirationDate)
         holder.thumbnailView.setBackgroundResource(StorageUtils.getPictureResourceId(item.name))
 
     }

@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodwaste.R
 import com.example.foodwaste.StorageUtils
+import com.example.foodwaste.StringUtils
 import com.example.foodwaste.model.FoodItem
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -78,9 +79,7 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
             holder.shareView.isVisible = false
             holder.shareIcon.isVisible = false
         }
-
-        val displayDateFormat = SimpleDateFormat("MMM dd")
-        holder.dateView.text = displayDateFormat.format(strDate)
+        holder.dateView.text = StringUtils.getPrettyDate(item.expirationDate)
     }
 
     // return the number of the items in the list

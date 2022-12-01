@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodwaste.R
 import com.example.foodwaste.StorageUtils
+import com.example.foodwaste.StringUtils
 import com.example.foodwaste.model.FoodItem
 
 class ExpiringListAdapter(private var mList: List<FoodItem>, private val activity: Activity, private val isChecked: (FoodItem, Boolean) -> Unit) :
@@ -46,7 +47,7 @@ class ExpiringListAdapter(private var mList: List<FoodItem>, private val activit
         holder.co2View.setTextColor(
             ContextCompat.getColor(activity, R.color.white_subtitle)
         )
-        holder.dateView.text = item.expirationDate
+        holder.dateView.text = StringUtils.getPrettyDate(item.expirationDate)
         holder.co2View.text = "${item.co2}kg"
         holder.pillView.isVisible = false
         holder.checkBoxView.isVisible = true
