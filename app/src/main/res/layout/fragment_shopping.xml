@@ -29,6 +29,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_shopping_title_text" />
 
+    <ImageView
+        android:id="@+id/fragment_shopping_empty_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/empty"
+        app:layout_constraintBottom_toTopOf="@id/fragment_shopping_add_to_storage_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_shopping_title_text" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fragment_shopping_scan_button"
         android:layout_width="0dp"

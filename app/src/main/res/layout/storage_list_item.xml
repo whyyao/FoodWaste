@@ -105,9 +105,9 @@
         android:layout_marginEnd="24dp"
         android:src="@drawable/ic_cancel"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/storage_list_item_thumbnail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/storage_list_item_thumbnail" />
 
     <ImageView
         android:id="@+id/storage_list_item_shared_icon"

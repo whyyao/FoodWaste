@@ -80,6 +80,7 @@ class ShoppingFragment : Fragment() {
         binding.fragmentShoppingAddToStorageButton.setOnClickListener {
             saveToStorage()
         }
+
         checkViewState()
     }
 
@@ -125,5 +126,6 @@ class ShoppingFragment : Fragment() {
     private fun checkViewState() {
         StorageUtils.saveToShoppingList(activity = requireActivity(), list = shoppingList)
         binding.fragmentShoppingAddToStorageButton.isVisible = shoppingList.isNotEmpty()
+        binding.fragmentShoppingEmptyView.isVisible = shoppingList.isEmpty()
     }
 }
