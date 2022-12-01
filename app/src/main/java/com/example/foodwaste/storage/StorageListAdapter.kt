@@ -55,18 +55,43 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
             holder.shareIcon.isVisible = false
         }
 
+        // Pills
         val sdf = SimpleDateFormat("dd/MM/yyyy")
         val strDate: Date = sdf.parse(item.expirationDate)
         val localTime: LocalDateTime =
             LocalDateTime.ofInstant(strDate.toInstant(), ZoneId.systemDefault())
+        val minus4days = localTime.minusDays(4).toLocalDate()
         val minus3days = localTime.minusDays(3).toLocalDate()
-        if (LocalDate.now().isAfter(minus3days)) {
-            // Pills
-            holder.pillView.isVisible = true
+        val minus2days = localTime.minusDays(2).toLocalDate()
+        val minus1days = localTime.minusDays(1).toLocalDate()
+        holder.pillView.isVisible = true
+        holder.pillView.background =
+            ContextCompat.getDrawable(activity, R.drawable.pill_bg)
+        val now = LocalDate.now()
+        if (now.isAfter(localTime.toLocalDate())) {
+            holder.pillView.text = "EXPIRED"
+        } else if (now.isAfter(minus2days)) {
+            holder.pillView.text = "1 Day"
+        } else if (now.isAfter(minus3days)) {
+            holder.pillView.text = "2 Days"
+        } else if (now.isAfter(minus4days)) {
             holder.pillView.text = "3 Days"
-            holder.pillView.background =
-                ContextCompat.getDrawable(activity, R.drawable.pill_bg)
+        } else {
+            holder.pillView.isVisible = false
         }
+//
+//
+//
+//        else if (now.isAfter(minus3days) && now.isBefore(minus4days)) {
+//            holder.pillView.text = "3 Days"
+//        } else if (now.isAfter(minus2days) && now.isBefore(minus3days)) {
+//            holder.pillView.text = "2 Days"
+//        } else if () {
+//            holder.pillView.text = "1 Days"
+//        } else {
+//            holder.pillView.isVisible = false
+//        }
+
         val displayDateFormat = SimpleDateFormat("MMM dd")
         holder.dateView.text = displayDateFormat.format(strDate)
     }
