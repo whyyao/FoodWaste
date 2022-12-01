@@ -36,7 +36,7 @@ class ShoppingListAdapter(
         val item = mList[position]
         StorageUtils.getStockFoodList(activity).let { foodItem ->
             // If it exists in stock, then show repeated
-            if (foodItem.any { it.name.contains(item.name, ignoreCase = true) }) {
+            if (foodItem.any { it.name.equals(item.name, ignoreCase = true) }) {
                 // Background
                 holder.backgroundLayout.background =
                     ColorDrawable(activity.resources.getColor(R.color.repeated_item_color))

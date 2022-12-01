@@ -65,7 +65,7 @@ class StockFragment : Fragment() {
 
 
         binding.fragmentStockUseButton.setOnClickListener {
-            if (expiringList.all { !it.isChecked }) {
+            if (expiringFoodList.all { !it.isChecked }) {
                 return@setOnClickListener
             }
             val usedList = expiringFoodList.filter { it.isChecked }

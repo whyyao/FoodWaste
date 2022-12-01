@@ -57,6 +57,7 @@ class ExpiringListAdapter(
         holder.checkBoxView.setOnCheckedChangeListener { buttonView, isChecked ->
             isChecked(item, isChecked)
         }
+        holder.checkBoxView.isChecked = item.isChecked
     }
 
     override fun getItemCount(): Int {
