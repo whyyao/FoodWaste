@@ -131,9 +131,34 @@
         android:textColor="@color/subtitle"
         android:textSize="14sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/storage_list_item_cancel"
         app:layout_constraintStart_toEndOf="@id/storage_list_item_shared_icon"
         app:layout_constraintTop_toBottomOf="@id/storage_list_item_date" />
+
+    <ImageView
+        android:id="@+id/storage_list_item_other_food_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/shrimps"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/storage_list_item_title"
+        app:layout_constraintTop_toBottomOf="@id/storage_list_item_shared_text" />
+
+    <TextView
+        android:id="@+id/storage_list_item_other_food_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:text="Shrimps: go well with tomatoes."
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/storage_list_item_other_food_icon"
+        app:layout_constraintTop_toBottomOf="@id/storage_list_item_shared_text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

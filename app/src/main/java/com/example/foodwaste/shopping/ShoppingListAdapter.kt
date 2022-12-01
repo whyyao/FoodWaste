@@ -60,10 +60,15 @@ class ShoppingListAdapter(
                 )
                 holder.shareView.text =
                     "You already have some in your fridge, lets try something else!"
+
+                holder.otherFoodView.isVisible = true
+                holder.otherFoodIcon.isVisible = true
             } else {
                 holder.pillView.isVisible = false
                 holder.shareIcon.isVisible = false
                 holder.shareView.isVisible = false
+                holder.otherFoodView.isVisible = false
+                holder.otherFoodIcon.isVisible = false
             }
         }
         holder.titleView.text = item.name
@@ -101,5 +106,8 @@ class ShoppingListAdapter(
         val thumbnailView: ImageView = itemView.findViewById(R.id.storage_list_item_thumbnail)
         val shareView: TextView = itemView.findViewById(R.id.storage_list_item_shared_text)
         val shareIcon: ImageView = itemView.findViewById(R.id.storage_list_item_shared_icon)
+        val otherFoodView: TextView = itemView.findViewById(R.id.storage_list_item_other_food_text)
+        val otherFoodIcon: ImageView = itemView.findViewById(R.id.storage_list_item_other_food_icon)
+
     }
 }
