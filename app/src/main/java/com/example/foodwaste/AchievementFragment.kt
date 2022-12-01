@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.foodwaste.databinding.FragmentAchievementBinding
 
-class AchievementFragment : Fragment() {
-
+class AchievementFragment(private val mode: Int) : Fragment() {
 
     private var _binding: FragmentAchievementBinding? = null
     private val binding get() = _binding!!
@@ -27,6 +27,14 @@ class AchievementFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().window.statusBarColor =
             resources.getColor(R.color.achievement_top_color, null)
+
+        binding.fragmentAchievementImage.setBackgroundResource(
+            if (mode == 1 || mode == 2) {
+                R.drawable.achievement1
+            } else {
+                R.drawable.achievement2
+            }
+        )
     }
 
 }

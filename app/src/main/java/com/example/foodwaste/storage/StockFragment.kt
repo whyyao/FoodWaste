@@ -25,13 +25,13 @@ class StockFragment : Fragment() {
 
     private var expiringFoodList: List<FoodItem> = emptyList()
         set(value) {
-            field = value
-            expiringListAdapter.update(value)
+            field = value.sortedBy { it.expirationDate }
+            expiringListAdapter.update(field)
         }
     private var stockFoodList: List<FoodItem> = emptyList()
         set(value) {
-            field = value
-            stockListAdapter.update(value)
+            field = value.sortedBy { it.expirationDate }
+            stockListAdapter.update(field)
         }
 
     override fun onCreateView(

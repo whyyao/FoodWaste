@@ -26,10 +26,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val shoppingFragment = ShoppingFragment()
-        val stockFragment = StockFragment()
-        val achievementFragment = AchievementFragment()
-
         val sharedPref = getPreferences(
             Context.MODE_PRIVATE
         )
@@ -45,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             putString("stock", gson.toJson(testStockList))
             apply()
         }
+
+        val shoppingFragment = ShoppingFragment()
+        val stockFragment = StockFragment()
+        val achievementFragment = AchievementFragment(mode)
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, stockFragment).commit()
@@ -80,7 +80,7 @@ val testExpiringList1 = emptyList<FoodItem>()
 
 val testExpiringList2 = listOf(
     FoodItem(
-        name = "Aubergine 500g",
+        name = "Aubergine",
         expirationDate = "3/12/2022",
         co2 = 2.0
     ),

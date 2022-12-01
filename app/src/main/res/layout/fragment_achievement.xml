@@ -6,10 +6,10 @@
     android:background="@color/achievement_top_color">
 
     <ImageView
+        android:id="@+id/fragment_achievement_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/achievement"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

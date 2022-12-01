@@ -27,6 +27,11 @@ class StartActivity : AppCompatActivity() {
             intent.putExtra("mode", 2)
             startActivity(intent)
         }
+
+        binding.activityStartButton3.setOnClickListener {
+            intent.putExtra("mode", 3)
+            startActivity(intent)
+        }
     }
 
 }
