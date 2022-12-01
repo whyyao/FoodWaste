@@ -9,15 +9,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.foodwaste.CaptureAct
 import com.example.foodwaste.R
+import com.example.foodwaste.StorageUtils
 import com.example.foodwaste.databinding.FragmentShoppingBinding
 import com.example.foodwaste.model.FoodItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
-import java.lang.reflect.Type
 
 
 /**
@@ -57,8 +56,7 @@ class ShoppingFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentShoppingBinding.inflate(inflater, container, false)
         requireActivity().window.statusBarColor =
@@ -68,19 +66,17 @@ class ShoppingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val tempStorageList = StorageUtils.getShoppingList(requireActivity())
         binding.fragmentShoppingScanButton.setOnClickListener {
             scanCode()
         }
-        binding.storageRecyclerViewShoppingTrackerList.adapter = ShoppingListAdapter(
-            emptyList(),
-            requireActivity(),
-            cancel = {
+        binding.storageRecyclerViewShoppingTrackerList.adapter =
+            ShoppingListAdapter(tempStorageList, requireActivity(), cancel = {
                 val tempList = shoppingList.toMutableList()
                 tempList.remove(it)
                 shoppingList = tempList
-            }
-        )
+            })
+        shoppingList = tempStorageList
         binding.fragmentShoppingAddToStorageButton.setOnClickListener {
             saveToStorage()
         }
@@ -110,38 +106,24 @@ class ShoppingFragment : Fragment() {
             }
         } catch (e: java.lang.Exception) {
             MaterialAlertDialogBuilder(
-                requireContext(),
-                R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog
-            )
-                .setTitle("Oops!")
-                .setMessage("Unrecognized code")
-                .setPositiveButton("Ok", null)
-                .show()
+                requireContext(), R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog
+            ).setTitle("Oops!").setMessage("Unrecognized code").setPositiveButton("Ok", null).show()
         }
-
     }
 
     private fun saveToStorage() {
-        val sharedPref = requireActivity().getPreferences(
-            Context.MODE_PRIVATE
-        )
-        val gson = Gson()
-        with(sharedPref?.edit() ?: return) {
-            val listType: Type = object : TypeToken<List<FoodItem?>?>() {}.type
-            val stockList =
-                Gson().fromJson<List<FoodItem>>(sharedPref.getString("stock", ""), listType)
-                    .orEmpty()
-            val tempList: MutableList<FoodItem> = mutableListOf()
-            tempList.addAll(stockList)
-            tempList.addAll(shoppingList)
-            putString("stock", gson.toJson(tempList))
-            apply()
-        }
+        val stockList = StorageUtils.getStockFoodList(requireActivity())
+        val tempList: MutableList<FoodItem> = mutableListOf()
+        tempList.addAll(stockList)
+        tempList.addAll(shoppingList)
+        StorageUtils.saveToStockFoodList(activity = requireActivity(), list = tempList)
         shoppingList = emptyList()
+        StorageUtils.saveToShoppingList(activity = requireActivity(), list = shoppingList)
         checkViewState()
     }
 
     private fun checkViewState() {
+        StorageUtils.saveToShoppingList(activity = requireActivity(), list = shoppingList)
         binding.fragmentShoppingAddToStorageButton.isVisible = shoppingList.isNotEmpty()
     }
 }

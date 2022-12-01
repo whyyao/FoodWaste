@@ -29,6 +29,17 @@ object StorageUtils {
             .orEmpty()
     }
 
+    fun getShoppingList(activity: Activity): List<FoodItem> {
+        val sharedPref = activity.getPreferences(
+            Context.MODE_PRIVATE
+        )
+        val listType: Type = object : TypeToken<List<FoodItem?>?>() {}.type
+        val gson = Gson()
+        return gson.fromJson<List<FoodItem>>(sharedPref.getString("shopping", ""), listType)
+            .orEmpty()
+    }
+
+
     fun saveToExpiringFoodList(activity: Activity, list: List<FoodItem>) {
         val sharedPref = activity.getPreferences(
             Context.MODE_PRIVATE
@@ -41,6 +52,13 @@ object StorageUtils {
             Context.MODE_PRIVATE
         )
         sharedPref?.edit()?.putString("stock", Gson().toJson(list))?.apply()
+    }
+
+    fun saveToShoppingList(activity: Activity, list: List<FoodItem>) {
+        val sharedPref = activity.getPreferences(
+            Context.MODE_PRIVATE
+        )
+        sharedPref?.edit()?.putString("shopping", Gson().toJson(list))?.apply()
     }
 
     fun getPictureResourceId(name: String): Int {
