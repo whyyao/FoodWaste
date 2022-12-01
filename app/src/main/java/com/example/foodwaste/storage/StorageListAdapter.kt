@@ -1,5 +1,6 @@
 package com.example.foodwaste.storage
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
@@ -22,37 +23,37 @@ import java.util.*
 class StorageListAdapter(private var mList: List<FoodItem>, private val activity: Activity) :
     RecyclerView.Adapter<StorageListAdapter.ViewHolder>() {
 
-    // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        // inflates the card_view_design view
-        // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.storage_list_item, parent, false)
 
         return ViewHolder(view)
     }
 
-    // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mList[position]
+
+        // Basic Information
         holder.titleView.text = item.name
         holder.co2View.text = "${item.co2}kg"
         holder.thumbnailView.setBackgroundResource(StorageUtils.getPictureResourceId(item.name))
-        holder.pillView.isVisible = false
+        holder.dateView.text = StringUtils.getPrettyDate(item.expirationDate)
 
-        // Pills
-        val sdf = SimpleDateFormat("dd/MM/yyyy")
-        val strDate: Date = sdf.parse(item.expirationDate)
-        val localTime: LocalDateTime =
-            LocalDateTime.ofInstant(strDate.toInstant(), ZoneId.systemDefault())
-        val minus4days = localTime.minusDays(4).toLocalDate()
-        val minus3days = localTime.minusDays(3).toLocalDate()
-        val minus2days = localTime.minusDays(2).toLocalDate()
+        // Expiration Date Pills
         holder.pillView.isVisible = true
         holder.pillView.background =
             ContextCompat.getDrawable(activity, R.drawable.pill_bg)
+
+        val apiDateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val apiDate: Date = apiDateFormat.parse(item.expirationDate)
+        val apiLocalTime: LocalDateTime =
+            LocalDateTime.ofInstant(apiDate.toInstant(), ZoneId.systemDefault())
+        val minus4days = apiLocalTime.minusDays(4).toLocalDate()
+        val minus3days = apiLocalTime.minusDays(3).toLocalDate()
+        val minus2days = apiLocalTime.minusDays(2).toLocalDate()
+
         val now = LocalDate.now()
-        if (now.isAfter(localTime.toLocalDate())) {
+        if (now.isAfter(apiLocalTime.toLocalDate())) {
             holder.pillView.text = "EXPIRED"
         } else if (now.isAfter(minus2days)) {
             holder.pillView.text = "1 Day"
@@ -64,6 +65,7 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
             holder.pillView.isVisible = false
         }
 
+        // Mark shared items
         if (item.isShared) {
             // Pills
             holder.pillView.isVisible = true
@@ -76,25 +78,23 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
             holder.shareIcon.isVisible = true
             holder.shareView.text = "Item is shared in your flat."
         } else {
+            // Otherwise hide share information
             holder.shareView.isVisible = false
             holder.shareIcon.isVisible = false
         }
-        holder.dateView.text = StringUtils.getPrettyDate(item.expirationDate)
     }
 
-    // return the number of the items in the list
     override fun getItemCount(): Int {
         return mList.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun update(list: List<FoodItem>) {
         mList = list
         notifyDataSetChanged()
     }
 
-    // Holds the views for adding it to image and text
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        //        val imageView: ImageView = itemView.findViewById(R.id.imageview)
         val titleView: TextView = itemView.findViewById(R.id.storage_list_item_title)
         val dateView: TextView = itemView.findViewById(R.id.storage_list_item_date)
         val dateIcon: ImageView = itemView.findViewById(R.id.storage_list_item_calendar_icon)

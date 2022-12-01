@@ -1,7 +1,7 @@
 package com.example.foodwaste.shopping
 
+import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +16,6 @@ import com.example.foodwaste.R
 import com.example.foodwaste.StorageUtils
 import com.example.foodwaste.StringUtils
 import com.example.foodwaste.model.FoodItem
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import org.w3c.dom.Text
-import java.lang.reflect.Type
 
 
 class ShoppingListAdapter(
@@ -38,12 +34,10 @@ class ShoppingListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mList[position]
-        val sharedPref = activity.getPreferences(
-            Context.MODE_PRIVATE
-        )
-        val listType: Type = object : TypeToken<List<FoodItem?>?>() {}.type
-        Gson().fromJson<List<FoodItem>>(sharedPref.getString("stock", ""), listType)?.let {
-            if (it.any { it.name == item.name }) {
+        StorageUtils.getStockFoodList(activity).let { foodItem ->
+            // If it exists in stock, then show repeated
+            if (foodItem.any { it.name == item.name }) {
+                // Background
                 holder.backgroundLayout.background =
                     ColorDrawable(activity.resources.getColor(R.color.repeated_item_color))
 
@@ -53,6 +47,7 @@ class ShoppingListAdapter(
                 holder.pillView.background =
                     ContextCompat.getDrawable(activity, R.drawable.pill_bg_repeated)
 
+                // Share Information Text
                 holder.shareIcon.isVisible = true
                 holder.shareView.isVisible = true
                 holder.shareIcon.setImageDrawable(
@@ -71,16 +66,19 @@ class ShoppingListAdapter(
                 holder.otherFoodIcon.isVisible = false
             }
         }
+
+        // Basic Information
         holder.titleView.text = item.name
         holder.co2View.isVisible = false
         holder.co2IconView.isVisible = false
+        holder.dateView.text = StringUtils.getPrettyDate(item.expirationDate)
+        holder.thumbnailView.setBackgroundResource(StorageUtils.getPictureResourceId(item.name))
+
+        // Cancel button
         holder.cancelIcon.isVisible = true
         holder.cancelIcon.setOnClickListener {
             cancel.invoke(item)
         }
-        holder.dateView.text = StringUtils.getPrettyDate(item.expirationDate)
-        holder.thumbnailView.setBackgroundResource(StorageUtils.getPictureResourceId(item.name))
-
     }
 
     // return the number of the items in the list
@@ -88,6 +86,7 @@ class ShoppingListAdapter(
         return mList.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun update(list: List<FoodItem>) {
         mList = list
         notifyDataSetChanged()
