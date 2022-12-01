@@ -96,5 +96,20 @@ val testStockList = listOf(
         name = "Aubergine",
         expirationDate = "Dec 20",
         co2 = 1
+    ),
+    FoodItem(
+        name = "Corns",
+        expirationDate = "Dec 20",
+        co2 = 1
+    ),
+    FoodItem(
+        name = "Mushroom",
+        expirationDate = "Dec 20",
+        co2 = 1
+    ),
+    FoodItem(
+        name = "Green Onions",
+        expirationDate = "Dec 20",
+        co2 = 1
     )
 )
