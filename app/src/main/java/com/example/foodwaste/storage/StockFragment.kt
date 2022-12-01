@@ -116,7 +116,7 @@ class StockFragment : Fragment() {
     private fun isChecked(foodItem: FoodItem, isChecked: Boolean) {
         val tempList = expiringFoodList.toMutableList()
         tempList.forEach { item ->
-            if (item.name == foodItem.name) {
+            if (item.name.equals(foodItem.name, ignoreCase = true)) {
                 item.isChecked = isChecked
             }
         }
