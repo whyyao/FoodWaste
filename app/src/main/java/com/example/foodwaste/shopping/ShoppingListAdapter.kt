@@ -21,7 +21,11 @@ import org.w3c.dom.Text
 import java.lang.reflect.Type
 
 
-class ShoppingListAdapter(private var mList: List<FoodItem>, private val activity: Activity, private val cancel: (foodItem: FoodItem) -> Unit ) :
+class ShoppingListAdapter(
+    private var mList: List<FoodItem>,
+    private val activity: Activity,
+    private val cancel: (foodItem: FoodItem) -> Unit
+) :
     RecyclerView.Adapter<ShoppingListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,25 +42,28 @@ class ShoppingListAdapter(private var mList: List<FoodItem>, private val activit
         )
         val listType: Type = object : TypeToken<List<FoodItem?>?>() {}.type
         Gson().fromJson<List<FoodItem>>(sharedPref.getString("stock", ""), listType)?.let {
-            it.forEach { foodItem ->
-                if (foodItem.name == item.name) {
-                    holder.backgroundLayout.background =
-                        ColorDrawable(activity.resources.getColor(R.color.repeated_item_color))
+            if (it.any { it.name == item.name }) {
+                holder.backgroundLayout.background =
+                    ColorDrawable(activity.resources.getColor(R.color.repeated_item_color))
 
-                    // Pills
-                    holder.pillView.isVisible = true
-                    holder.pillView.text = "Repeated"
-                    holder.pillView.background =
-                        ContextCompat.getDrawable(activity, R.drawable.pill_bg_repeated)
+                // Pills
+                holder.pillView.isVisible = true
+                holder.pillView.text = "Repeated"
+                holder.pillView.background =
+                    ContextCompat.getDrawable(activity, R.drawable.pill_bg_repeated)
 
-                    // Date text
-                    holder.dateIcon.setImageDrawable(
-                        ContextCompat.getDrawable(activity, R.drawable.ic_fridge)
-                    )
-                    holder.dateView.text = "You already have some in your fridge."
-                } else {
-                    holder.pillView.isVisible = false
-                }
+                // Date text
+                holder.shareIcon.isVisible = true
+                holder.shareView.isVisible = true
+                holder.shareIcon.setImageDrawable(
+                    ContextCompat.getDrawable(activity, R.drawable.ic_fridge)
+                )
+                holder.shareView.text =
+                    "You already have some in your fridge, lets try something else!"
+            } else {
+                holder.pillView.isVisible = false
+                holder.shareIcon.isVisible = false
+                holder.shareView.isVisible = false
             }
         }
         holder.titleView.text = item.name
@@ -92,6 +99,7 @@ class ShoppingListAdapter(private var mList: List<FoodItem>, private val activit
         val backgroundLayout: ConstraintLayout = itemView.findViewById(R.id.storage_list_item_bg)
         val cancelIcon: ImageView = itemView.findViewById(R.id.storage_list_item_cancel)
         val thumbnailView: ImageView = itemView.findViewById(R.id.storage_list_item_thumbnail)
-
+        val shareView: TextView = itemView.findViewById(R.id.storage_list_item_shared_text)
+        val shareIcon: ImageView = itemView.findViewById(R.id.storage_list_item_shared_icon)
     }
 }

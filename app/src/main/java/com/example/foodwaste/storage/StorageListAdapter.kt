@@ -73,7 +73,7 @@ class StorageListAdapter(private var mList: List<FoodItem>, private val activity
             // Share View
             holder.shareView.isVisible = true
             holder.shareIcon.isVisible = true
-            holder.shareView.text = "Item is shared in your flat"
+            holder.shareView.text = "Item is shared in your flat."
         } else {
             holder.shareView.isVisible = false
             holder.shareIcon.isVisible = false
