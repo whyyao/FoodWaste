@@ -65,6 +65,9 @@ class StockFragment : Fragment() {
 
 
         binding.fragmentStockUseButton.setOnClickListener {
+            if (expiringList.all { !it.isChecked }) {
+                return@setOnClickListener
+            }
             expiringFoodList = expiringFoodList.filter { !it.isChecked }
             StorageUtils.saveToExpiringFoodList(requireActivity(), expiringFoodList)
             MaterialAlertDialogBuilder(requireContext(),
