@@ -64,6 +64,8 @@ class ShoppingListAdapter(
                 holder.shareView.isVisible = false
                 holder.otherFoodView.isVisible = false
                 holder.otherFoodIcon.isVisible = false
+
+                holder.backgroundLayout.background = null
             }
         }
 
